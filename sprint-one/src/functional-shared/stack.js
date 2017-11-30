@@ -5,23 +5,34 @@ var Stack = function(loc) {
 
   result['count'] = 0;  
   result['storage'] = {};
-  
+  result['popped'];
   extend(result, stackMethods);
   return result;
 };
 
-function extend(obj, method) {
+var extend = function (obj, method) {
   for (var key in method) {
     obj[key] = method[key];  
   }
-}
+};
 
 
 var stackMethods = {
-  pop : function() {},
-  push : function(value) {},
-  size : function() {
-    return 0;
+  pop: function() {
+    if (this.count) {
+      this.count--;
+    }
+    this.popped = this.storage[this.count];
+    delete this.storage[this.count];
+    return this.popped;
+    
+  },
+  push: function(value) {
+    this.storage[this.count] = value;
+    this.count++;
+  },
+  size: function() {
+    return this.count;
   }
 };
 
