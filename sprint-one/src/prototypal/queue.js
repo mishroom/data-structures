@@ -28,7 +28,6 @@ queueMethods.dequeue = function () {
   
   return this.dequeued;
 };
-//edit test
 
 queueMethods.size = function () {
   return this.count;
