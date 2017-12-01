@@ -2,26 +2,46 @@
 
 // Instantiate a new graph
 var Graph = function() {
+  this.storage = {};
 };
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  this.storage[node] = {'node': node, 'connectors': []};
 };
 
-// Return a boolean value indicating if the value passed to contains is represented in the graph.
+// Return a boolean value indicating if the value passed to contains 
+//is represented in the graph.
 Graph.prototype.contains = function(node) {
+  //go through each key in this.storage and see if this.storage.key.node === node
+  //{1 : {node: 1, connectors:[]}} 
+  for (var key in this.storage) {
+    if (Number(key) === node) {
+      return true;
+    }
+  } 
+  return false; 
 };
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
 };
 
-// Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
+// Returns a boolean indicating whether two specified nodes are connected.  
+//Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
+//each node has an connectors array that keeps track of what node it connects to
+//goes through the connectors array to check if it equal toNode
+  //fromNode = {node: value, connectors = [a, b, 65]}, toNode = 3
+  //iterate through fromNode.connectors to find toNode.
 };
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
+//go to the fromNode and add the toNode to the connectors array
+  //fromNode = {node: value, connectors = [a, b, 65]}, toNode = 3
+  //=> fromNode = {node: value, connectors = [a, b, 65, 3]}
+
 };
 
 // Remove an edge between any two specified (by value) nodes.
