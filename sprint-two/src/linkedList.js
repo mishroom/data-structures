@@ -67,6 +67,18 @@ var LinkedList = function() {
   list.contains = function(target) {
     //traverse through node to find value
     //O(n)
+    //go through the keys of the list
+    var isContains = false;
+    for (var keys in list) {
+      if (keys['value'] === target || list.head.value === target || list.tail.value === target) {
+        isContains = true;
+      } 
+    }
+    //check the values of the keys
+    //see if it equals target;
+        
+    return isContains;
+
   };
 
   return list;
