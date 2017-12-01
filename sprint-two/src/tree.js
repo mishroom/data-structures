@@ -26,15 +26,17 @@ treeMethods.addChild = function(value) {
   
 };
 
-treeMethods.contains = function(target) {
+treeMethods.contains = function(target, foundTarget) {
   //check if newTree.value is target, if not, 
   //iterate through children array to find
-  var foundTarget = false;
+  if (!foundTarget) {
+    foundTarget = false;
+  }
   if (this.value === target) {
     return true;
   }
   for (var i = 0; i < this.children.length; i++) {
-    this.children[i].contains(target);
+    foundTarget = this.children[i].contains(target, foundTarget);
   }
 return foundTarget;
 };
