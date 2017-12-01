@@ -1,5 +1,5 @@
 var LinkedList = function() {
-  var linkedListNode = {};
+  // var linkedListNode = {};
   var list = {};
   list.head = null;
   list.tail = null;
@@ -19,16 +19,27 @@ var LinkedList = function() {
     //if the tail does not exist, we want to set the tail = new node
     //if tail does exists, we need rename it to its value, change next
     // value, we need to create the new tail
-    if (!list.head) {
-      list.head = Node(value);
-      list.head.next = list.head.value;
-    }
+    // if (Object.keys(list)) {
+    //   if (!list.head) {
+    //     list.head = Node(value);
+    //     list.head.next = value;
+    //   }
+    // }
     if (list.tail) {
+    var isHead = false;
+      if (!list.head) {
+        list.head = {};
+        list.head.value = list.tail.value;
+        isHead = true;
+      }
       var name = list.tail.value;
       list[name] = list.tail;
       list[name].next = value;
     }
     list.tail = Node(value);
+    if (isHead) {
+      list.head.next = list.tail.value;
+    }
     //}
     
   };
@@ -38,15 +49,19 @@ var LinkedList = function() {
     // create var to keep track of head.next   
     //delete head
     //reassigne head.next to head
+    var keys = Object.entries(list);
     if (list.head) {
+      var popped = list.head.value;
       var nextNode = list.head.next;
+      var nextNext = list.head.next.next;
       delete list.head;
+      list.head = {};
+      list.head.value = nextNode;
+      list.head.next = nextNext;
       
     }
-    list.head = list[nextNode];
-      return nextNode;
-  
-    
+    return keys[1][1].value;
+    //head is returning null for 5th test
   };
 
   list.contains = function(target) {
