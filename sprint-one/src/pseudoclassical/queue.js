@@ -11,17 +11,21 @@ var Queue = function() {
 //   // dequeued: function () {},
 //   //size: function () {return this.count;}
 // };
-Queue.prototype.push = function(value) {
+Queue.prototype.enqueue = function(value) {
   this.storage[this.count] = value;
   this.count++;
 };
 
-Queue.prototype.pop = function() {
+Queue.prototype.dequeue = function() {
   if (this.count) {
     this.count--;  
   }
   this.popped = this.storage['0'];
-  delete 
+  delete this.storage['0'];
+  for (var key in this.storage) {
+    this.storage[key - 1] = this.storage[key];
+  }
+  return this.popped;
 };
 
 Queue.prototype.size = function() {
