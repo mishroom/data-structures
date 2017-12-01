@@ -34,8 +34,8 @@ Graph.prototype.removeNode = function(node) {
 
   //5 = {node:5, connectors =[]}
   // 
-  for (var i = 0; i < this.storage[node].connectors.length; i++) {
-    this.removeEdge(node, this.storage[node].connectors[i]);
+  for (var i = 0; i < this.storage[node]['connectors'].length; i++) {
+    this.removeEdge(node, this.storage[node]['connectors'][i]);
   }
   delete this.storage[node];
 };
@@ -50,8 +50,8 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
   if (!this.storage[toNode] || !this.storage[fromNode]) {
     return false;
   }
-  for (var i = 0; i < this.storage[toNode].connectors.length; i++) {
-    if (this.storage[toNode].connectors[i] === fromNode) {
+  for (var i = 0; i < this.storage[toNode]['connectors'].length; i++) {
+    if (this.storage[toNode]['connectors'][i] === fromNode) {
       return true;
     }
   }
@@ -65,9 +65,15 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
   //=> fromNode = {node: value, connectors = [a, b, 65, 3]}
   // fromNode = 3: {node: 3, connectors =[6]};
   // toNode = 6 : {node: 6, connectors = [3]};
-  console.log(this.storage);
-  this.storage[fromNode].connectors.push(toNode);
-  this.storage[toNode].connectors.push(fromNode);
+  console.log('fromNode', fromNode, 'toNode', toNode);
+  // console.log('this.storage', this.storage);
+  // console.log('storagefromnode', this.storage[fromNode]);
+  // console.log('current before = ', this.storage[fromNode]['connectors']);
+  // console.log('before array length = ', this.storage[fromNode]['connectors'].length);
+  this.storage[fromNode]['connectors'].push(toNode);
+  this.storage[toNode]['connectors'].push(fromNode);
+  // console.log('current after = ', this.storage[fromNode]['connectors']);
+  // console.log('after array length = ', this.storage[fromNode]['connectors'].length);
 
 };
 
@@ -77,13 +83,13 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
   // find toNode and splice out that value (splice(i, 1));
   // repeat for fromNode
   for (var i = 0; i < this.storage[fromNode].connectors.length; i++) {
-    if (this.storage[fromNode].connectors[i] === toNode) {
-      this.storage[fromNode].connectors.splice(i, 1);
+    if (this.storage[fromNode]['connectors'][i] === toNode) {
+      this.storage[fromNode]['connectors'].splice(i, 1);
     }
   }
   for (var i = 0; i < this.storage[toNode].connectors.length; i++) {
-    if (this.storage[toNode].connectors[i] === fromNode) {
-      this.storage[toNode].connectors.splice(i, 1);
+    if (this.storage[toNode]['connectors'][i] === fromNode) {
+      this.storage[toNode]['connectors'].splice(i, 1);
     }
   }
 };
@@ -91,7 +97,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
   for (var node in this.storage) {
-    cb(this.storage[node]);
+    cb(this.storage[node].node);
   }
   
 };
