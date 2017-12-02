@@ -87,15 +87,18 @@ methods.depthFirstLog = function (callback) {
 // if there is, apply callback to the value
 // if this.value.right -> do recursive callback application
 // if this.value.left -> same thing
-  console.log('value:', this.value);
+  // console.log('value:', this.value);
   if (this.value) {
-    callback(this.value)
+    // console.log('callbacked value:', callback(this.value));
+    callback(this.value);
+    // console.log(this);
+    if (this.left) {
+      this.left.depthFirstLog(callback);
+    }
     if (this.right) {
       this.right.depthFirstLog(callback);
     }   
-    if (this.left) {
-      this.left.depthfirstLog(callback);
-    }
+    
   }
 };
 
