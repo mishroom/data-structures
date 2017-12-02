@@ -10,7 +10,7 @@ var BinarySearchTree = function(value) {
   // if (!node) {
   //   node = storage;
   // }
-  console.log("storage in main function: ", storage);
+  // console.log("storage in main function: ", storage);
   // console.log("node in main function: ", node);
   storage.value = value;
   storage.right;
@@ -30,8 +30,7 @@ var methods = {};
 
 methods.insert = function (item) {
   //iterate through the tree
-  console.log("storage in insert: ", this);
-//return null;
+  // console.log("storage in insert: ", this);
   if (item < this.value) {
     //go to left
     if (!this.left) {
@@ -54,10 +53,34 @@ methods.insert = function (item) {
 // node2 = BinarySearchTree(2);
 // node3 = BinarySearchTree(3);
 
-methods.addNode = function (value) {
-  return {'value': value, left: {}, right: {}};
+// methods.addNode = function (value) {
+//   return {'value': value, left: {}, right: {}};
+// };
+// return boolean if something exists
+// we want to store the t/f value into a t/f counter
+// true, break the recursion loops, false, recurse
+// at the end, return the t/f counter
+methods.contains = function (item) {
+  var doesContain;
+  if (this.value) {
+    if (item === this.value) {
+      //console.log("passed at value", item);
+      return true;
+    } else if (item < this.value) {
+      if (!this.left){
+        return false;
+      }
+      doesContain = this.left.contains(item);
+    } else if (item > this.value) {
+      if (!this.right) {
+        return false;
+      }
+      doesContain = this.right.contains(item);
+    }
+  }
+  return doesContain;
 };
-methods.contains = function () {};
+
 methods.depthFirstLog = function () {};
 
 /*
