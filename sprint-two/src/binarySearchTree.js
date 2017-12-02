@@ -67,7 +67,7 @@ methods.contains = function (item) {
       //console.log("passed at value", item);
       return true;
     } else if (item < this.value) {
-      if (!this.left){
+      if (!this.left) {
         return false;
       }
       doesContain = this.left.contains(item);
@@ -81,7 +81,23 @@ methods.contains = function (item) {
   return doesContain;
 };
 
-methods.depthFirstLog = function () {};
+methods.depthFirstLog = function (callback) {
+  // go through each node in tree, apply callback if a value exists
+// checks if there is a value in the left or right
+// if there is, apply callback to the value
+// if this.value.right -> do recursive callback application
+// if this.value.left -> same thing
+  console.log('value:', this.value);
+  if (this.value) {
+    callback(this.value)
+    if (this.right) {
+      this.right.depthFirstLog(callback);
+    }   
+    if (this.left) {
+      this.left.depthfirstLog(callback);
+    }
+  }
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
